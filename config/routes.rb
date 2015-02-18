@@ -1,56 +1,47 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+    resources :users do
+      resources :itemauctions
+      resources :items_bidded, only: :index
+    end
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+    resources :itemauctions do
+      resources :bids
+      resources :bidders, only: :index
+    end
 end
+
+#                  Prefix Verb   URI Pattern                                           Controller#Action
+#       user_itemauctions GET    /users/:user_id/itemauctions(.:format)                itemauctions#index
+#                         POST   /users/:user_id/itemauctions(.:format)                itemauctions#create
+#    new_user_itemauction GET    /users/:user_id/itemauctions/new(.:format)            itemauctions#new
+#   edit_user_itemauction GET    /users/:user_id/itemauctions/:id/edit(.:format)       itemauctions#edit
+#        user_itemauction GET    /users/:user_id/itemauctions/:id(.:format)            itemauctions#show
+#                         PATCH  /users/:user_id/itemauctions/:id(.:format)            itemauctions#update
+#                         PUT    /users/:user_id/itemauctions/:id(.:format)            itemauctions#update
+#                         DELETE /users/:user_id/itemauctions/:id(.:format)            itemauctions#destroy
+# user_items_bidded_index GET    /users/:user_id/items_bidded(.:format)                items_bidded#index
+#                   users GET    /users(.:format)                                      users#index
+#                         POST   /users(.:format)                                      users#create
+#                new_user GET    /users/new(.:format)                                  users#new
+#               edit_user GET    /users/:id/edit(.:format)                             users#edit
+#                    user GET    /users/:id(.:format)                                  users#show
+#                         PATCH  /users/:id(.:format)                                  users#update
+#                         PUT    /users/:id(.:format)                                  users#update
+#                         DELETE /users/:id(.:format)                                  users#destroy
+#        itemauction_bids GET    /itemauctions/:itemauction_id/bids(.:format)          bids#index
+#                         POST   /itemauctions/:itemauction_id/bids(.:format)          bids#create
+#     new_itemauction_bid GET    /itemauctions/:itemauction_id/bids/new(.:format)      bids#new
+#    edit_itemauction_bid GET    /itemauctions/:itemauction_id/bids/:id/edit(.:format) bids#edit
+#         itemauction_bid GET    /itemauctions/:itemauction_id/bids/:id(.:format)      bids#show
+#                         PATCH  /itemauctions/:itemauction_id/bids/:id(.:format)      bids#update
+#                         PUT    /itemauctions/:itemauction_id/bids/:id(.:format)      bids#update
+#                         DELETE /itemauctions/:itemauction_id/bids/:id(.:format)      bids#destroy
+#     itemauction_bidders GET    /itemauctions/:itemauction_id/bidders(.:format)       bidders#index
+#            itemauctions GET    /itemauctions(.:format)                               itemauctions#index
+#                         POST   /itemauctions(.:format)                               itemauctions#create
+#         new_itemauction GET    /itemauctions/new(.:format)                           itemauctions#new
+#        edit_itemauction GET    /itemauctions/:id/edit(.:format)                      itemauctions#edit
+#             itemauction GET    /itemauctions/:id(.:format)                           itemauctions#show
+#                         PATCH  /itemauctions/:id(.:format)                           itemauctions#update
+#                         PUT    /itemauctions/:id(.:format)                           itemauctions#update
+#                         DELETE /itemauctions/:id(.:format)                           itemauctions#destroy
